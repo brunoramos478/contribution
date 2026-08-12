@@ -21,7 +21,7 @@ public class DatabaseConnection {
             }
             props.load(input);
 
-        } catch (IOException e) {
+        } catch (SQLException e) {
             throw new RuntimeException("Erro ao carregar db.properties", e);
         }
     }
