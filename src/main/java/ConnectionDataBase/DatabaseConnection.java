@@ -1,5 +1,6 @@
 package ConnectionDataBase;
 
+import exceptions.PropertiesNotFound;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -17,12 +18,13 @@ public class DatabaseConnection {
                 .getResourceAsStream("db.properties")) {
 
             if (input == null) {
-                throw new RuntimeException("Arquivo db.properties não encontrado em resources!");
+                throw new PropertiesNotFound();
             }
             props.load(input);
 
-        } catch (SQLException e) {
-            throw new RuntimeException("Erro ao carregar db.properties", e);
+        }
+        catch (IOException e) {
+            throw new PropertiesNotFound("Erro ao carregar db.properties");
         }
     }
 
@@ -33,4 +35,6 @@ public class DatabaseConnection {
 
         return DriverManager.getConnection(url, user, password);
     }
+
+    private DatabaseConnection(){}
 }

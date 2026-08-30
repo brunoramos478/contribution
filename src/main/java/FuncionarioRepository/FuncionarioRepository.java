@@ -3,13 +3,14 @@ package FuncionarioRepository;
 import ConnectionDataBase.DatabaseConnection;
 import funcionarios.Funcionarios;
 
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class FuncionarioRepository {
 
+    private static final Logger log = Logger.getLogger(FuncionarioRepository.class.getName());
 
     // INSERT
     public void save(Funcionarios funcionarios) throws SQLException {
@@ -24,7 +25,7 @@ public class FuncionarioRepository {
             stmt.setString(4, funcionarios.getHireDate());
             stmt.executeUpdate();
 
-            System.out.println("Funcionário salvo com sucesso!");
+            log.info("Funcionário salvo com sucesso!");
         }
     }
 
@@ -85,8 +86,8 @@ public class FuncionarioRepository {
             stmt.setInt(1, id);
             int rowsDeleted = stmt.executeUpdate();
 
-            if (rowsDeleted > 0) System.out.println("Funcionário deletado com sucesso!");
-            else System.out.println("Funcionário não encontrado!");
+            if (rowsDeleted > 0) log.info("Funcionário deletado com sucesso!");
+            log.info("Funcionário não encontrado!");
         }
     }
 }
